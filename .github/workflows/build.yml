@@ -32,8 +32,8 @@ jobs:
         git config --global user.name "EuanBot"
     - name: Commit files
       run: |
-        git add -f dist
+        git add -f docs
         git commit -nm "Build files"
     - name: Push changes
       if: success()
-      run: git subtree push --prefix dist origin gh-pages
+      run: git push
