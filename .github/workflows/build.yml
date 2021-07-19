@@ -30,10 +30,14 @@ jobs:
       run: |
         git config --global user.email "euan@spicerack.co.uk"
         git config --global user.name "EuanBot"
+    - name: Checkout branch
+      run: |
+        git branch -f site
+        git checkout site
     - name: Commit files
       run: |
         git add -f docs
         git commit -nm "Build files"
     - name: Push changes
       if: success()
-      run: git push
+      run: git push -f
