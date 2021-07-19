@@ -36,4 +36,4 @@ jobs:
         git commit -nm "Build files"
     - name: Push changes
       if: success()
-      run: git push origin `git subtree split --prefix dist gh-pages`:refs/heads/gh-pages --force
+      run: git subtree push --prefix dist origin gh-pages
