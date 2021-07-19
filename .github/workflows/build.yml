@@ -40,4 +40,4 @@ jobs:
         git commit -nm "Build files"
     - name: Push changes
       if: success()
-      run: git push -f
+      run: git push -f origin site
