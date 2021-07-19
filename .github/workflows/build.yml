@@ -1,0 +1,39 @@
+name: Build site
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install yarn
+      run: npm i -g yarn
+    - run: yarn install
+    - name: Run build script
+      run: yarn build
+    - name: Configure git
+      run: |
+        git config --global user.email "euan@spicerack.co.uk"
+        git config --global user.name "EuanBot"
+    - name: Commit files
+      run: |
+        git add dist
+        git commit -nm "Build files"
+    - name: Push changes
+      if: success()
+      run: git push origin `git subtree split --prefix dist master`:gh-pages --force
