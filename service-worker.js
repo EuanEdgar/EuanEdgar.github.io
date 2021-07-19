@@ -11,13 +11,13 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  '/precache-manifest.78dda9e1c71bb981ad613df6406cb29a.js',
+  "/precache-manifest.a74ca76325b13ab8add6f8a879c02268.js"
 );
 
-workbox.core.setCacheNameDetails({ prefix: 'EuanEdgar.github.io' });
+workbox.core.setCacheNameDetails({prefix: "EuanEdgar.github.io"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
