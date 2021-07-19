@@ -32,7 +32,7 @@ jobs:
         git config --global user.name "EuanBot"
     - name: Commit files
       run: |
-        git add dist
+        git add -f dist
         git commit -nm "Build files"
     - name: Push changes
       if: success()
