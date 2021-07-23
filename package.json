@@ -7,6 +7,7 @@
     "email": "euan@spicerack.co.uk"
   },
   "scripts": {
+    "start": "yarn serve --port 3000",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
