@@ -10,7 +10,7 @@ const nameToSlug = (name) => (
   name.trim()
     .toLowerCase()
     .replace(/\s+/g, '-')
-    .replace(/[^a-z\d-]/g, '')
+    .replace(/[^-a-z\d]/g, '')
 );
 
 const locationForPost = ({ slug, name }) => ({
