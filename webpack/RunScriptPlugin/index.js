@@ -10,13 +10,15 @@ class RunScriptPlugin {
       );
     }
     this.scriptPath = scriptPath;
+
+    ['run'].forEach((fnName) => { this[fnName] = this[fnName].bind(this); });
   }
 
   apply(compiler) {
     compiler.hooks.run.tapPromise(this.name, this.run);
     compiler.hooks.watchRun.tapPromise(
       this.name,
-      runOnce(this.run.bind(this), Promise.resolve(undefined)),
+      runOnce(this.run, Promise.resolve(undefined)),
     );
   }
 
