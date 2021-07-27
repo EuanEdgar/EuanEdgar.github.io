@@ -1,8 +1,8 @@
 <template>
-  <h1>
-    This is a page in the blog site
-    <router-link :to="{ name: 'Blog-About' }">About</router-link>
-  </h1>
+  <div>
+    <h1>Blog</h1>
+    <router-link :to="{ name: 'Blog-Categories' }">Categories</router-link>
+  </div>
 </template>
 
 <script lang="js">

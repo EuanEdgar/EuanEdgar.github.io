@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ post.title }}</h1>
+    <h1>{{ post.name }}</h1>
     <p>
       <router-link
         v-for="category in post.categories"
