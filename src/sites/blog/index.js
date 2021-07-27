@@ -17,7 +17,12 @@ registerSite({
       component: () => import('@/sites/blog/views/Categories'),
     },
     {
-      path: 'post/:slug',
+      path: 'categories/:slug',
+      name: 'Blog-Category',
+      component: () => import('@/sites/blog/views/Category'),
+    },
+    {
+      path: 'posts/:slug',
       name: 'Blog-Post',
       component: () => import('@/sites/blog/views/Post'),
     },

@@ -6,6 +6,8 @@ const blogNamespace = 'Blog';
 const postsDir = path.resolve(__dirname, './posts');
 const dataDir = path.resolve(__dirname, './data');
 
+const uncategorisedCategory = 'Uncategorised';
+
 const nameToSlug = (name) => (
   name.trim()
     .toLowerCase()
@@ -27,92 +29,111 @@ const locationForCategory = ({ slug }) => ({
   },
 });
 
-const folders = fs.readdirSync(postsDir);
-const posts = folders.map((postFolder) => {
-  const postJson = JSON.parse(
-    fs.readFileSync(path.resolve(postsDir, postFolder, 'post.json')),
-  );
-
-  try {
-    const markdownPath = path.resolve(postsDir, postFolder, 'post.md');
-
-    fs.accessSync(markdownPath);
-    const markdown = fs.readFileSync(markdownPath, 'utf-8');
-    postJson.content = markdown;
-  } catch (e) {}
-
-  postJson.slug = postJson.slug || nameToSlug(postJson.name);
-  postJson.created = new Date(postJson.created);
-  postJson.location = locationForPost(postJson);
-
-  return postJson;
+const postForListing = ({
+  name,
+  location,
+  created,
+}) => ({
+  name,
+  location,
+  created,
 });
 
-posts.sort(({ created: a }, { created: b }) => a - b);
+const build = () => {
+  const folders = fs.readdirSync(postsDir);
+  const posts = folders.map((postFolder) => {
+    const postJson = JSON.parse(
+      fs.readFileSync(path.resolve(postsDir, postFolder, 'post.json')),
+    );
 
-const categories = posts.reduce((categories, post) => {
-  const { category } = post;
-  const categoryName = category || 'Uncategorised';
+    try {
+      const markdownPath = path.resolve(postsDir, postFolder, 'post.md');
 
-  if (!categories[categoryName]) {
-    categories[categoryName] = [];
-  }
-  categories[categoryName].push(post);
+      fs.accessSync(markdownPath);
+      const markdown = fs.readFileSync(markdownPath, 'utf-8');
+      postJson.content = markdown;
+    } catch (e) {}
 
-  return categories;
-}, {});
+    postJson.categories = (postJson.categories || []).filter((category) => category !== uncategorisedCategory);
+    postJson.slug = postJson.slug || nameToSlug(postJson.name);
+    postJson.created = new Date(postJson.created);
+    postJson.location = locationForPost(postJson);
 
-const categoriesList = Object.entries(categories).map(([name, posts]) => {
-  const slug = nameToSlug(name);
-  return {
-    name,
-    slug,
-    postCount: posts.length,
-    location: locationForCategory({ slug }),
+    return postJson;
+  });
+
+  posts.sort(({ created: a }, { created: b }) => a - b);
+
+  const categories = posts.reduce((categories, post) => {
+    let { categories: postCategories } = post;
+    if (!postCategories.length) {
+      postCategories = [uncategorisedCategory];
+    }
+
+    postCategories.forEach((categoryName) => {
+      if (!categories[categoryName]) {
+        categories[categoryName] = [];
+      }
+      categories[categoryName].push(post);
+    });
+
+    return categories;
+  }, {});
+
+  const categoriesList = Object.entries(categories).map(([name, posts]) => {
+    const slug = nameToSlug(name);
+    return {
+      name,
+      slug,
+      postCount: posts.length,
+      location: locationForCategory({ slug }),
+    };
+  });
+
+  const categoryObjects = Object.entries(categories).map(([name, posts]) => {
+    const slug = nameToSlug(name);
+
+    return {
+      name,
+      slug,
+      posts: posts.map(postForListing),
+      location: locationForCategory({ slug }),
+    };
+  });
+
+  const ensureDirExists = (dir) => {
+    try {
+      fs.accessSync(dir);
+    } catch (e) {
+      fs.mkdirSync(dir);
+    }
   };
-});
 
-const categoryObjects = Object.entries(categories).map(([name, posts]) => {
-  const slug = nameToSlug(name);
+  fs.rmSync(dataDir, { force: true, recursive: true });
+  ensureDirExists(dataDir);
 
-  return {
-    name,
-    slug,
-    posts,
-    location: locationForCategory({ slug }),
-  };
-});
+  const categoriesJsonFile = path.resolve(dataDir, 'categories.json');
 
-const ensureDirExists = (dir) => {
-  try {
-    fs.accessSync(dir);
-  } catch (e) {
-    fs.mkdirSync(dir);
-  }
+  const promises = [];
+
+  promises.splice(0, 0, fsPromises.writeFile(categoriesJsonFile, JSON.stringify(categoriesList, null, 2)));
+
+  const categoriesOutputDir = path.resolve(dataDir, 'categories');
+  ensureDirExists(categoriesOutputDir);
+
+  promises.splice(0, 0, categoryObjects.map((category) => {
+    const fileName = path.resolve(categoriesOutputDir, `${category.slug}.json`);
+    return fsPromises.writeFile(fileName, JSON.stringify(category, null, 2));
+  }));
+
+  const postsOutputDir = path.resolve(dataDir, 'posts');
+  ensureDirExists(postsOutputDir);
+  promises.splice(0, 0, posts.map((post) => {
+    const fileName = path.resolve(postsOutputDir, `${post.slug}.json`);
+    return fsPromises.writeFile(fileName, JSON.stringify(post, null, 2));
+  }));
+
+  return Promise.all(promises);
 };
 
-fs.rmSync(dataDir, { force: true, recursive: true });
-ensureDirExists(dataDir);
-
-const categoriesJsonFile = path.resolve(dataDir, 'categories.json');
-
-const promises = [];
-
-promises.splice(0, 0, fsPromises.writeFile(categoriesJsonFile, JSON.stringify(categoriesList, null, 2)));
-
-const categoriesOutputDir = path.resolve(dataDir, 'categories');
-ensureDirExists(categoriesOutputDir);
-
-promises.splice(0, 0, categoryObjects.map((category) => {
-  const fileName = path.resolve(categoriesOutputDir, `${category.slug}.json`);
-  return fsPromises.writeFile(fileName, JSON.stringify(category, null, 2));
-}));
-
-const postsOutputDir = path.resolve(dataDir, 'posts');
-ensureDirExists(postsOutputDir);
-promises.splice(0, 0, posts.map((post) => {
-  const fileName = path.resolve(postsOutputDir, `${post.slug}.json`);
-  return fsPromises.writeFile(fileName, JSON.stringify(post, null, 2));
-}));
-
-return Promise.all(promises);
+module.exports = build;

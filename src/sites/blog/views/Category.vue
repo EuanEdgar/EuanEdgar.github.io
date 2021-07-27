@@ -1,12 +1,13 @@
 <template>
   <DataLoader :path="dataPath">
     <template v-slot="{data}">
-      <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+      <CategoryDisplay :category="data" />
     </template>
   </DataLoader>
 </template>
 
 <script lang="js">
+import CategoryDisplay from '@/sites/blog/components/CategoryDisplay';
 import DataLoader from '@/sites/blog/components/DataLoader';
 
 export default {
@@ -17,10 +18,11 @@ export default {
     },
     dataPath() {
       const { slug } = this;
-      return `posts/${slug}`;
+      return `categories/${slug}`;
     },
   },
   components: {
+    CategoryDisplay,
     DataLoader,
   },
 };

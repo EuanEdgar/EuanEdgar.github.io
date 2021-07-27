@@ -8,7 +8,12 @@ const registerSite = (config) => {
 
   router.addRoute({
     path: rootPath,
-    component: { render: (c) => c('router-view') },
+    component: {
+      name: 'AnonymousRouterView',
+      render(c) {
+        return c('router-view', { key: this.$router.currentRoute.fullPath });
+      },
+    },
     children: routes.map(({ path, ...routeConfig }) => ({
       path: path.startsWith('/') ? path.slice(1) : path,
       ...routeConfig,
