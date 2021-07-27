@@ -1,18 +1,21 @@
 import router from '@/router';
 
+import SiteWrapper from '@/components/SiteWrapper';
+
 const registerSite = (config) => {
   const {
+    name,
     path: rootPath,
     routes,
+    store: getSiteStore,
   } = config;
 
   router.addRoute({
     path: rootPath,
-    component: {
-      name: 'AnonymousRouterView',
-      render(c) {
-        return c('router-view', { key: this.$router.currentRoute.fullPath });
-      },
+    component: SiteWrapper,
+    props: {
+      moduleName: name.toLowerCase(),
+      getSiteStore,
     },
     children: routes.map(({ path, ...routeConfig }) => ({
       path: path.startsWith('/') ? path.slice(1) : path,

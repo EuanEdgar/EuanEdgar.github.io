@@ -1,7 +1,5 @@
 import registerSite from '@/utils/registerSite';
 
-import Home from '@/sites/blog/views/Home';
-
 registerSite({
   name: 'Blog',
   path: '/blog',
@@ -9,7 +7,7 @@ registerSite({
     {
       path: '',
       name: 'Blog-Home',
-      component: Home,
+      component: () => import('@/sites/blog/views/Home'),
     },
     {
       path: 'categories',
