@@ -54,7 +54,15 @@ const build = () => {
       postJson.content = markdown;
     } catch (e) {}
 
-    postJson.categories = (postJson.categories || []).filter((category) => category !== uncategorisedCategory);
+    let categories = (postJson.categories || []).filter((category) => category !== uncategorisedCategory);
+    if (!categories.length) {
+      categories = [uncategorisedCategory];
+    }
+    postJson.categories = categories.map((name) => ({
+      name,
+      location: locationForCategory({ slug: nameToSlug(name) }),
+    }));
+
     postJson.slug = postJson.slug || nameToSlug(postJson.name);
     postJson.created = new Date(postJson.created);
     postJson.location = locationForPost(postJson);
@@ -65,16 +73,13 @@ const build = () => {
   posts.sort(({ created: a }, { created: b }) => a - b);
 
   const categories = posts.reduce((categories, post) => {
-    let { categories: postCategories } = post;
-    if (!postCategories.length) {
-      postCategories = [uncategorisedCategory];
-    }
+    const { categories: postCategories } = post;
 
-    postCategories.forEach((categoryName) => {
-      if (!categories[categoryName]) {
-        categories[categoryName] = [];
+    postCategories.forEach(({ name }) => {
+      if (!categories[name]) {
+        categories[name] = [];
       }
-      categories[categoryName].push(post);
+      categories[name].push(post);
     });
 
     return categories;

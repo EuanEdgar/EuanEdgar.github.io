@@ -1,13 +1,14 @@
 <template>
   <DataLoader :path="dataPath">
     <template v-slot="{data}">
-      <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+      <Post :post="data" />
     </template>
   </DataLoader>
 </template>
 
 <script lang="js">
 import DataLoader from '@/sites/blog/components/DataLoader';
+import Post from '@/sites/blog/components/Post';
 
 export default {
   computed: {
@@ -22,6 +23,7 @@ export default {
   },
   components: {
     DataLoader,
+    Post,
   },
 };
 </script>
