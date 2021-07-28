@@ -1,39 +1,20 @@
 <template>
-  <router-view
+  <StoreProvider
     v-if="!loading"
     :key="currentRoute.fullPath"
-  />
+    :moduleName="moduleName"
+  >
+    <router-view />
+  </StoreProvider>
 </template>
 
 <script lang="js">
+import StoreProvider from './StoreProvider';
+
 export default {
   props: {
     moduleName: String,
     getSiteStore: Function,
-  },
-  provide() {
-    const {
-      moduleName,
-      $store,
-    } = this;
-
-    return {
-      getOwnStore: () => ({
-        state: $store.state[moduleName],
-        dispatch: (action, ...args) => (
-          $store.dispatch(`${moduleName}/${action}`, ...args)
-        ),
-        commit: (mutation, ...args) => (
-          $store.commit(`${moduleName}/${mutation}`, ...args)
-        ),
-        getters: Object.entries($store.getters).filter(([key]) => (
-          key.startsWith(moduleName)
-        )).reduce((getters, [key, getter]) => ({
-          ...getters,
-          [key]: getter,
-        }), {}),
-      }),
-    };
   },
   data() {
     return {
@@ -70,6 +51,9 @@ export default {
       const { currentRoute } = this.$router;
       return currentRoute;
     },
+  },
+  components: {
+    StoreProvider,
   },
 };
 </script>
