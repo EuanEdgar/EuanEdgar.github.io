@@ -1,7 +1,6 @@
 <template>
   <StoreProvider
     v-if="!loading"
-    :key="currentRoute.fullPath"
     :moduleName="moduleName"
   >
     <router-view />
@@ -45,12 +44,6 @@ export default {
         this.loading = false;
       }
     }
-  },
-  computed: {
-    currentRoute() {
-      const { currentRoute } = this.$router;
-      return currentRoute;
-    },
   },
   components: {
     StoreProvider,
