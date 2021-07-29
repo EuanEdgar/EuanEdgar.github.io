@@ -18,7 +18,7 @@ export default {
     },
     dataPath() {
       const { slug } = this;
-      return `posts/${slug}`;
+      return `posts/${slug}/post`;
     },
   },
   components: {

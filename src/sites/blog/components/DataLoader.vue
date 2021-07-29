@@ -39,22 +39,32 @@ export default {
   updated() {
     this.loadData();
   },
+  computed: {
+    dataPath() {
+      let { path } = this;
+      if (!path.includes('.')) {
+        path = `${path}.json`;
+      }
+
+      return path;
+    },
+  },
   methods: {
     async loadData() {
       const {
-        path,
+        dataPath,
         dataLoaded,
       } = this;
 
-      if (path && path !== dataLoaded) {
+      if (dataPath && dataPath !== dataLoaded) {
         this.loading = true;
         try {
-          const data = await import(`@/sites/blog/data/${path}.json`);
+          const data = await import(`@/sites/blog/data/${dataPath}`);
           this.data = data.default;
         } catch (e) {
           this.error = e;
         }
-        this.dataLoaded = path;
+        this.dataLoaded = dataPath;
         this.loading = false;
       }
     },
