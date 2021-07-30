@@ -1,26 +1,19 @@
+const categoryToListing = require('./categoryToListing');
+
 const applyCategoriesToPost = (post, categories) => {
   post.categories = post.categories.map((categoryName) => {
     const category = categories.find(({ name }) => name === categoryName);
 
-    const {
-      name,
-      location,
-      headerImage,
-    } = category;
-
-    return {
-      name,
-      location,
-      headerImage,
-    };
+    return categoryToListing(category);
   });
 
   if (!post.headerImage) {
-    const categoryWithHeaderImage = post.categories.find(({ headerImage }) => headerImage);
+    const postCategory = post.categories[0];
+    const category = categories.find(({ name }) => name === postCategory.name);
 
-    if (categoryWithHeaderImage) {
-      post.headerImage = categoryWithHeaderImage.headerImage.assetFile;
-      post.assets.push(categoryWithHeaderImage.headerImage);
+    if (category) {
+      post.headerImage = category.headerImage;
+      post.assets.push(category.assets.find(({ assetFile }) => assetFile === category.headerImage));
     }
   }
 };

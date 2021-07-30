@@ -1,10 +1,23 @@
 const path = require('path');
 const fs = require('fs/promises');
+
+const ensureDirExists = require('../utils/ensureDirExists');
+const storeCategoryAssets = require('./storeCategoryAssets');
 const { categoriesDataDir } = require('../constants');
 
-const storeCategoriesList = async (categoryObject) => {
-  const categoryJsonFile = path.resolve(categoriesDataDir, `${categoryObject.slug}.json`);
-  await fs.writeFile(categoryJsonFile, JSON.stringify(categoryObject, null, 2));
+const storeCategoryObject = async (categoryObject) => {
+  const categoryDir = path.resolve(categoriesDataDir, categoryObject.slug);
+
+  await ensureDirExists(categoryDir);
+
+  const categoryJsonFile = path.resolve(categoryDir, 'category.json');
+
+  const { assets, ...categoryData } = categoryObject;
+
+  await Promise.all([
+    fs.writeFile(categoryJsonFile, JSON.stringify(categoryData, null, 2)),
+    storeCategoryAssets(categoryObject),
+  ]);
 };
 
-module.exports = storeCategoriesList;
+module.exports = storeCategoryObject;

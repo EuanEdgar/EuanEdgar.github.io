@@ -7,8 +7,13 @@ const buildCategory = (category, { posts: allPosts, defaultCategoryHeaderImage }
 
   const posts = allPosts.filter(({ categories }) => categories.includes(category.name));
 
+  const { headerImage } = category;
+  if (!headerImage) {
+    category.headerImage = defaultCategoryHeaderImage.assetFile;
+    category.assets.push(defaultCategoryHeaderImage);
+  }
+
   return {
-    headerImage: defaultCategoryHeaderImage,
     ...category,
     slug,
     location,

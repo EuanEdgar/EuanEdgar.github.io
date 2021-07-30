@@ -4,11 +4,13 @@ const categoryToListing = ({
     length: postCount,
   },
   location,
+  slug,
   headerImage,
 }) => ({
   name,
   postCount,
   location,
+  slug,
   headerImage,
 });
 

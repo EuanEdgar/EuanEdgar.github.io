@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 const ensureDirExists = require('../utils/ensureDirExists');
 const { postsDataDir } = require('../constants');
 
-const storePost = async ({ slug, assets }) => {
+const storePostAssets = async ({ slug, assets }) => {
   if (assets && assets.length) {
     const postAssetsFolder = path.resolve(postsDataDir, slug, 'assets');
 
@@ -17,4 +17,4 @@ const storePost = async ({ slug, assets }) => {
   }
 };
 
-module.exports = storePost;
+module.exports = storePostAssets;

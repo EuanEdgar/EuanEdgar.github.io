@@ -10,6 +10,7 @@ const reconcileCategories = ({
     }
     return {
       name,
+      assets: [],
     };
   })
 );
