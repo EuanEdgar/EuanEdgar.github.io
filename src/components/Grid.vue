@@ -4,7 +4,7 @@
       <b-col
         v-for="(item, index) in row"
         :key="index"
-        :cols="columnDefs['xs']"
+        :cols="columnDefs['xs'] || 12/count"
         :sm="columnDefs['sm']"
         :md="columnDefs['md']"
         :lg="columnDefs['lg']"

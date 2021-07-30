@@ -4,10 +4,12 @@ const categoryToListing = ({
     length: postCount,
   },
   location,
+  headerImage,
 }) => ({
   name,
   postCount,
   location,
+  headerImage,
 });
 
 module.exports = categoryToListing;

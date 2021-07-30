@@ -13,6 +13,8 @@ const loadRawCategories = require('./loaders/loadRawCategories');
 
 const buildPost = require('./transformations/buildPost');
 
+const loadDefaultCategoryHeaderImage = require('./loaders/loadDefaultCategoryHeaderImage');
+
 const reconcileCategories = require('./utils/reconcileCategories');
 const buildCategory = require('./transformations/buildCategory');
 
@@ -33,10 +35,14 @@ const build = async () => {
 
   const posts = rawPosts.map(buildPost);
 
+  const defaultCategoryHeaderImage = await loadDefaultCategoryHeaderImage();
   const categories = reconcileCategories({
     categoryData: rawCategories,
     categoryNames: uniq(posts.map(({ categories }) => categories).flat()),
-  }).map((category) => buildCategory(category, posts));
+  }).map((category) => buildCategory(category, {
+    posts,
+    defaultCategoryHeaderImage,
+  }));
 
   posts.forEach((post) => {
     applyCategoriesToPost(post, categories);

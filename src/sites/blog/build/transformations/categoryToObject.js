@@ -5,11 +5,13 @@ const categoryToObject = ({
   location,
   posts,
   slug,
+  headerImage,
 }) => ({
   name,
   location,
   posts: posts.map(postToListing),
   slug,
+  headerImage,
 });
 
 module.exports = categoryToObject;

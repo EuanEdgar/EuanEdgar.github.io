@@ -7,6 +7,8 @@ const {
   postsDir,
 } = require('../constants');
 
+const loadAssets = require('./loadAssets');
+
 const loadRawPosts = async () => {
   const folders = await fs.readdir(postsDir);
 
@@ -24,27 +26,15 @@ const loadRawPosts = async () => {
       postJson.content = markdown;
     }
 
-    const assetsPath = path.resolve(postDir, 'assets');
-    const postHasAssets = await fileExists(assetsPath);
-    if (postHasAssets) {
-      const assetFiles = await fs.readdir(assetsPath);
-      const assets = await Promise.all(assetFiles.map(async (assetFile) => {
-        const assetPath = path.resolve(assetsPath, assetFile);
-        const fileContent = await fs.readFile(assetPath);
-        return {
-          fileContent,
-          assetFile,
-        };
-      }));
+    const assets = await loadAssets(postDir);
 
-      postJson.assets = assets;
+    postJson.assets = assets;
 
-      if (postJson.headerImage) {
-        const imageName = postJson.headerImage;
-        const headerImage = postJson.assets.find(({ assetFile }) => assetFile === imageName);
-        if (!headerImage) {
-          throw new Error(`Could not find header image '${imageName}' for post '${postJson.name}'`);
-        }
+    if (postJson.headerImage) {
+      const imageName = postJson.headerImage;
+      const headerImage = postJson.assets.find(({ assetFile }) => assetFile === imageName);
+      if (!headerImage) {
+        throw new Error(`Could not find header image '${imageName}' for post '${postJson.name}'`);
       }
     }
 

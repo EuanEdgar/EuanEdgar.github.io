@@ -1,7 +1,10 @@
 <template>
-  <router-link :to="post.location">
+  <router-link
+    :to="post.location"
+    class="post-listing"
+  >
     <b-card
-      :title="post.title"
+      :title="post.name"
       :img-src="headerImage"
     >
       <b-card-text
@@ -34,4 +37,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a.post-listing {
+  text-decoration: none;
+  .card-body {
+    color: $white;
+    background-color: $dark-blue;
+  }
+}
 </style>
