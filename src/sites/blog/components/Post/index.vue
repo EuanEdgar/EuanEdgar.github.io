@@ -1,31 +1,24 @@
 <template>
-  <div>
-    <h1>{{ post.name }}</h1>
-    <p>
-      <router-link
-        v-for="category in post.categories"
-        :key="category.name"
-        :to="category.location"
-      >
-        {{ category.name }}
-      </router-link>
-    </p>
-
+  <b-container>
     <img
       v-if="headerImage"
       :src="headerImage"
     />
+    <h1>{{ post.name }}</h1>
+    <CategoriesList :categories="post.categories" />
     <Markdown
       :content="post.content"
       :getAsset="(asset) => postAsset(post, asset)"
+      incrementHeadings
     />
-  </div>
+  </b-container>
 </template>
 
 <script lang="js">
 import postAsset from '@/sites/blog/utils/postAsset';
-
 import Markdown from '@/sites/blog/components/Markdown';
+
+import CategoriesList from './CategoriesList';
 
 export default {
   props: {
@@ -47,6 +40,7 @@ export default {
     postAsset,
   },
   components: {
+    CategoriesList,
     Markdown,
   },
 };
