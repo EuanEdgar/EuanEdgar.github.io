@@ -185,6 +185,16 @@ Using this I wanted to expose an `ownStore` object to each of these sub-sites, a
 - [My `registerSite` method](https://github.com/EuanEdgar/euanedgar.github.io/blob/670145536da73d4c760103520ab634a8a9a0edbd/src/utils/registerSite.js)
 - [The SiteWrapper component](https://github.com/EuanEdgar/euanedgar.github.io/tree/ef4d0a5827e63bca06b8bac95605e8b5ba6b4871/src/components/SiteWrapper) (I had to separate out the anonymous component that had served my well up to now)
 
+Sites can now reference the `$store` provided variable and use `this.$store` as normal for a Vuex install.
+```js
+// This component can reference this.$store as if it were referencing the top-level store
+export default {
+  inject: ['$store'],
+}
+```
+
+If a component needs to access the root store, it can either not inject the `$store` object (And use `this.$store`), or it can inject the provided `$rootStore` object (And use `this.$rootStore`).
+
 # Future plans
 All that leads us up to where we are now. There are certainly steps in the process, intricacies of the design that I have missed, but that should serve you well as an overview.
 
