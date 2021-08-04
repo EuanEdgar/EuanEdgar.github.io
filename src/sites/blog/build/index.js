@@ -42,7 +42,7 @@ const build = async () => {
   }).map((category) => buildCategory(category, {
     posts,
     defaultCategoryHeaderImage,
-  }));
+  })).filter(({ posts }) => posts.length); // Only record categories that actually have posts
 
   posts.forEach((post) => {
     applyCategoriesToPost(post, categories);
