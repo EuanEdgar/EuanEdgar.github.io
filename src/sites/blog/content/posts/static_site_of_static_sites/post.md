@@ -184,3 +184,10 @@ Eventually this lead me to explore one of the features of Vue that I've not had 
 Using this I wanted to expose an `ownStore` object to each of these sub-sites, an object that would contain all of the features common to a Vuex store, but namespaced to the site that whatever component I was looking at existed within. I won't go into any too much more detail here - I had some fun with provided values not being reactive to changes and issues with rendering my wrappers before the module they expected to be there was ready - but my final solution is split across these two portions of the repo:
 - [My `registerSite` method](https://github.com/EuanEdgar/euanedgar.github.io/blob/670145536da73d4c760103520ab634a8a9a0edbd/src/utils/registerSite.js)
 - [The SiteWrapper component](https://github.com/EuanEdgar/euanedgar.github.io/tree/ef4d0a5827e63bca06b8bac95605e8b5ba6b4871/src/components/SiteWrapper) (I had to separate out the anonymous component that had served my well up to now)
+
+# Future plans
+All that leads us up to where we are now. There are certainly steps in the process, intricacies of the design that I have missed, but that should serve you well as an overview.
+
+You can find the full source code on my GitHub [here](https://github.com/EuanEdgar/euanedgar.github.io).
+
+You may have noticed that you're viewing this on the `/blog` sub-site. I do intend to make a similar post about that - there are some features I've not discussed here which were developed purely with this blog in mind - but there are a few things I want to clean up about it before it's ready for any kind of retrospective.
