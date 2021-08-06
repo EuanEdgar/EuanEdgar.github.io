@@ -59,8 +59,8 @@ export default {
       if (dataPath && dataPath !== dataLoaded) {
         this.loading = true;
         try {
-          const data = await import(`@/sites/blog/data/${dataPath}`);
-          this.data = data.default;
+          const response = await fetch(`/blog/${dataPath}`);
+          this.data = await response.json();
         } catch (e) {
           this.error = e;
         }
