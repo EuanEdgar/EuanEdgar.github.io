@@ -1,5 +1,8 @@
 // Colours
 $white: #ffffff;
+$black: #000000;
 
 $blue: #3366dd;
-$dark-blue: #1d3c84;
+$dark-blue-2: #1d3c84;
+$dark-blue-1: lighten($dark-blue-2, 10%);
+$dark-blue-3: darken($dark-blue-2, 30%);

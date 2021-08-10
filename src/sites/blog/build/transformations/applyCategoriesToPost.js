@@ -13,7 +13,7 @@ const applyCategoriesToPost = (post, categories) => {
 
     if (category) {
       post.headerImage = category.headerImage;
-      post.assets.push(category.assets.find(({ assetFile }) => assetFile === category.headerImage));
+      post.assets.push(category.assets.find(({ assetFile }) => assetFile === category.headerImage.src));
     }
   }
 };

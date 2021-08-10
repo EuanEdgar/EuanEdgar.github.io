@@ -8,9 +8,10 @@ const buildCategory = (category, { posts: allPosts, defaultCategoryHeaderImage }
   const posts = allPosts.filter(({ categories }) => categories.includes(category.name));
 
   const { headerImage } = category;
+  debugger;
   if (!headerImage) {
-    category.headerImage = defaultCategoryHeaderImage.assetFile;
-    category.assets.push(defaultCategoryHeaderImage);
+    category.headerImage = defaultCategoryHeaderImage.headerImage;
+    category.assets.push(defaultCategoryHeaderImage.asset);
   }
 
   return {

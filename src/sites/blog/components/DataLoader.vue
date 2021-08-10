@@ -21,6 +21,16 @@
 </template>
 
 <script lang="js">
+import Cache from '@/utils/Cache';
+
+const cache = new Cache({
+  async getter(path) {
+    const response = await fetch(path);
+    return response.json();
+  },
+  maxLength: 10,
+});
+
 export default {
   props: {
     path: String,
@@ -59,8 +69,7 @@ export default {
       if (dataPath && dataPath !== dataLoaded) {
         this.loading = true;
         try {
-          const response = await fetch(`/blog/${dataPath}`);
-          this.data = await response.json();
+          this.data = await cache.get(`/blog/${dataPath}`);
         } catch (e) {
           this.error = e;
         }

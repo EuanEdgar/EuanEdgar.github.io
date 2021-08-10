@@ -1,22 +1,25 @@
 <template>
-  <b-container>
-    <img
-      v-if="headerImage"
-      :src="headerImage"
+  <div>
+    <Nav
+      :image="image"
+      :imageOptions="imageOptions"
+      :text="post.name"
     />
-    <h1>{{ post.name }}</h1>
-    <CategoriesList :categories="post.categories" />
-    <Markdown
-      :content="post.content"
-      :getAsset="(asset) => postAsset(post, asset)"
-      incrementHeadings
-    />
-  </b-container>
+    <b-container>
+      <CategoriesList :categories="post.categories" />
+      <Markdown
+        :content="post.content"
+        :getAsset="(asset) => postAsset(post, asset)"
+        incrementHeadings
+      />
+    </b-container>
+  </div>
 </template>
 
 <script lang="js">
 import postAsset from '@/sites/blog/utils/postAsset';
 import Markdown from '@/sites/blog/components/Markdown';
+import Nav from '@/sites/blog/components/Nav';
 
 import CategoriesList from './CategoriesList';
 
@@ -25,15 +28,27 @@ export default {
     post: Object,
   },
   computed: {
-    headerImage() {
+    image() {
       const {
         headerImage,
-      } = this.post;
+      } = this;
 
       if (headerImage) {
-        return postAsset(this.post, headerImage);
+        return postAsset(this.post, headerImage.src);
       }
       return null;
+    },
+    imageOptions() {
+      const { headerImage } = this;
+
+      if (headerImage) {
+        return headerImage.options;
+      }
+      return undefined;
+    },
+    headerImage() {
+      const { headerImage } = this.post;
+      return headerImage;
     },
   },
   methods: {
@@ -42,6 +57,7 @@ export default {
   components: {
     CategoriesList,
     Markdown,
+    Nav,
   },
 };
 </script>

@@ -8,6 +8,7 @@ const registerSite = (config) => {
     path: rootPath,
     routes,
     store: getSiteStore,
+    wrapper,
   } = config;
 
   router.addRoute({
@@ -16,6 +17,7 @@ const registerSite = (config) => {
     props: {
       moduleName: name.toLowerCase(),
       getSiteStore,
+      wrapper,
     },
     children: routes.map(({ path, ...routeConfig }) => ({
       path: path.startsWith('/') ? path.slice(1) : path,
