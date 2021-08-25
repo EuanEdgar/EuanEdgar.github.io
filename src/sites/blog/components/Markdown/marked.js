@@ -39,6 +39,9 @@ const mark = (content, {
         case 'js':
           langFileName = 'javascript';
           break;
+        case 'md':
+          langFileName = 'markdown';
+          break;
         default:
           // Do nothing
       }
