@@ -236,7 +236,7 @@ Here I couldn't really figure out the best way to lay out the header that didn't
 The rest of the site is quite simple. I either used default bootstrap or markdown styling, or I applied one of a few simple styles. I did spend quite a while going back and forth on specific shades of blue and the behaviour of hovered and active tabs on the navigation pane but in the end I think it turned out alright.
 
 # Future plans
-This blog isn't finished. Obviously I plan to add more content to it as time passes, but also there are features that I've planned which I simply haven't implemented yet. For instance, the [latest content page]({ "name": "Blog-Home" }) has no content.
+This blog isn't finished. Obviously I plan to add more content to it as time passes, but also there are features that I've planned which I simply haven't implemented yet. For instance, the [latest content page]({"name":"Blog-Home"}) has no content.
 
 There's also plenty of minor things I didn't talk about here. At some point I decided that posts should be able to have multiple categories for example.
 
