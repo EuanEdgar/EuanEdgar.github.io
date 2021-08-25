@@ -1,9 +1,23 @@
 const path = require('path');
 const RunScriptPlugin = require('./webpack/RunScriptPlugin');
 
+const staticAssets = require('./src/sites/staticAssets');
+
+const outputDir = path.resolve(__dirname, 'docs');
+
 module.exports = {
   lintOnSave: false,
-  outputDir: path.resolve(__dirname, 'docs'),
+  outputDir,
+  chainWebpack: (config) => {
+    config.plugin('copy').tap(([paths]) => (
+      [
+        [
+          ...paths,
+          ...staticAssets({ outputDir }),
+        ],
+      ]
+    ));
+  },
   configureWebpack: {
     plugins: [
       new RunScriptPlugin(path.resolve(__dirname, 'src', 'sites', 'build')),

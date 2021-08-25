@@ -13,6 +13,7 @@ export default {
   props: {
     content: String,
     getAsset: Function,
+    getLink: Function,
     incrementHeadings: [Boolean, Number],
   },
   data() {
@@ -33,11 +34,13 @@ export default {
       const {
         content,
         getAsset,
+        getLink,
         incrementHeadings,
       } = this;
 
       this.html = await marked(content, {
         getAsset,
+        getLink,
         incrementHeadings,
       });
     },
@@ -54,6 +57,20 @@ export default {
     padding: 10px;
     border: 1px solid transparent;
     border-radius: 5px;
+  }
+
+  blockquote {
+    padding: 5px 0 5px 10px;
+    border-left: 2px solid #aaaaaa;
+    background-color: #f0f0f0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 </style>

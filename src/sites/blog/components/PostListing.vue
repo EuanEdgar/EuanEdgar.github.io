@@ -1,46 +1,37 @@
-<template>
-  <router-link
-    :to="post.location"
-    class="post-listing"
-  >
-    <b-card
-      :title="post.name"
-      :img-src="headerImage"
-    >
-      <b-card-text
-        v-if="post.summary"
-      >
-        {{ post.summary }}
-      </b-card-text>
-    </b-card>
-  </router-link>
-</template>
-
 <script lang="js">
+import ObjectListing from '@/sites/blog/components/ObjectListing';
+
 import postAsset from '@/sites/blog/utils/postAsset';
 
 export default {
+  mixins: [ObjectListing],
   props: {
     post: Object,
+  },
+  data() {
+    return {
+      className: 'post',
+    };
   },
   computed: {
     headerImage() {
       const { headerImage } = this.post;
       if (headerImage) {
-        return postAsset(this.post, headerImage);
+        return postAsset(this.post, headerImage.src);
       }
       return null;
+    },
+    location() {
+      const { location } = this.post;
+      return location;
+    },
+    name() {
+      const { name } = this.post;
+      return name;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-a.post-listing {
-  text-decoration: none;
-  .card-body {
-    color: $white;
-    background-color: $dark-blue;
-  }
-}
 </style>

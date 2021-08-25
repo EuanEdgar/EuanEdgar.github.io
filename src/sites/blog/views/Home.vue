@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h1>Blog</h1>
-    <router-link :to="{ name: 'Blog-Categories' }">Categories</router-link>
+    <Nav />
   </div>
 </template>
 
 <script lang="js">
+import Nav from '@/sites/blog/components/Nav';
+
 export default {
+  components: {
+    Nav,
+  },
 };
 </script>
 

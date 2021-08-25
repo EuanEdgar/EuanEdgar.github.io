@@ -14,8 +14,13 @@ const loadDefaultCategoryHeaderImage = async () => {
   const fileContent = await fs.readFile(imagePath);
 
   return {
-    fileContent,
-    assetFile: defaultCategoryHeaderImage,
+    asset: {
+      fileContent,
+      assetFile: defaultCategoryHeaderImage,
+    },
+    headerImage: {
+      src: defaultCategoryHeaderImage,
+    },
   };
 };
 

@@ -1,4 +1,11 @@
 {
   "name": "Vue",
-  "headerImage": "vue.svg"
+  "headerImage": {
+    "src": "vue.svg",
+    "options": {
+      "size": "contain",
+      "repeat": true,
+      "background-color": "#ffffff"
+    }
+  }
 }

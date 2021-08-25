@@ -1,0 +1,13 @@
+{
+  "name": "JavaScript",
+  "headerImage": {
+    "src": "JavaScript-logo.png",
+    "options": {
+      "background-color": "#f0db50",
+      "color": "#323330",
+      "size": "contain",
+      "position": "right 20px center",
+      "lowContrast": false
+    }
+  }
+}

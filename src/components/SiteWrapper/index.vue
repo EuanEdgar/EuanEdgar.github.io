@@ -3,17 +3,21 @@
     v-if="!loading"
     :moduleName="moduleName"
   >
-    <router-view />
+    <RenderSiteWrapper :wrapper="wrapper">
+      <router-view />
+    </RenderSiteWrapper>
   </StoreProvider>
 </template>
 
 <script lang="js">
+import RenderSiteWrapper from './RenderSiteWrapper';
 import StoreProvider from './StoreProvider';
 
 export default {
   props: {
     moduleName: String,
     getSiteStore: Function,
+    wrapper: Function,
   },
   data() {
     return {
@@ -46,6 +50,7 @@ export default {
     }
   },
   components: {
+    RenderSiteWrapper,
     StoreProvider,
   },
 };

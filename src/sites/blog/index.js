@@ -3,6 +3,7 @@ import registerSite from '@/utils/registerSite';
 registerSite({
   name: 'Blog',
   path: '/blog',
+  wrapper: () => import('@/sites/blog/components/PageWrapper'),
   routes: [
     {
       path: '',

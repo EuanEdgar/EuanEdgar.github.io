@@ -19,8 +19,14 @@ const loadRawCategories = async () => {
     const assets = await loadAssets(categoryDir);
     categoryJson.assets = assets;
 
+    if (typeof categoryJson.headerImage === 'string') {
+      categoryJson.headerImage = {
+        src: categoryJson.headerImage,
+      };
+    }
+
     if (categoryJson.headerImage) {
-      const imageName = categoryJson.headerImage;
+      const imageName = categoryJson.headerImage.src;
       const headerImage = categoryJson.assets.find(({ assetFile }) => assetFile === imageName);
       if (!headerImage) {
         throw new Error(`Could not find header image '${imageName}' for category '${categoryJson.name}'`);

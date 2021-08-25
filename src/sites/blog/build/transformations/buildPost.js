@@ -13,6 +13,12 @@ const buildPost = (post) => {
   const created = new Date(post.created);
   const location = locationForPost({ slug });
 
+  if (typeof post.headerImage === 'string') {
+    post.headerImage = {
+      src: post.headerImage,
+    };
+  }
+
   return {
     ...post,
     slug,
