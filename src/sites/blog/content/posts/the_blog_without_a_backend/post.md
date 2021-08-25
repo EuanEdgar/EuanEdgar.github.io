@@ -238,4 +238,6 @@ The rest of the site is quite simple. I either used default bootstrap or markdow
 # Future plans
 This blog isn't finished. Obviously I plan to add more content to it as time passes, but also there are features that I've planned which I simply haven't implemented yet. For instance, the [latest content page]({ "name": "Blog-Home" }) has no content.
 
-For the meantime though, I think I'm about done with this part of the project. I expect I will return, but for now I want to try out something else. If you want to take a poke around, see for yourself in more detail what I've done here, you can check out the full source code on my GitHub [here](https://github.com/EuanEdgar/euanedgar.github.io/tree/master/src/sites/blog).
+There's also plenty of minor things I didn't talk about here. At some point I decided that posts should be able to have multiple categories for example.
+
+For the meantime though, I think I'm about done with this part of the project. I expect I will return, but for now I want to try out something else. If you want to take a poke around, see for yourself in more detail what I've done here, you can check out the full source code on my GitHub [here](https://github.com/EuanEdgar/euanedgar.github.io/tree/master/src/sites/blog), or check out this post [here](https://github.com/EuanEdgar/euanedgar.github.io/tree/master/src/sites/blog/content/posts/the_blog_without_a_backend).
