@@ -2,7 +2,7 @@ import router from '@/router';
 
 const blogComponents = {
   post: 'Blog-Post',
-  category: 'Blog-Categories',
+  category: 'Blog-Category',
 };
 
 const blogLink = (link) => {
