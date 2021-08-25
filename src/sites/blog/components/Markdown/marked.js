@@ -5,12 +5,18 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 import isAbsoluteLink from '@/sites/blog/utils/isAbsoluteLink';
 
+marked.use({
+  renderer: {
+    code: (content) => `<pre class="hljs">${content}</pre>`,
+  },
+});
+
 const mark = (content, {
   getAsset,
   getLink,
   incrementHeadings,
-}) => {
-  marked.use({
+}) => new Promise((s, f) => {
+  marked(content, {
     walkTokens(token) {
       const { type } = token;
       if (type === 'image' && getAsset) {
@@ -43,7 +49,7 @@ const mark = (content, {
           langFileName = 'markdown';
           break;
         default:
-          // Do nothing
+            // Do nothing
       }
 
       const lang = await import(`highlight.js/lib/languages/${langFileName}`);
@@ -52,19 +58,13 @@ const mark = (content, {
       const highlighted = highlight.highlight(code, { language }).value;
       callback(undefined, highlighted);
     },
-    renderer: {
-      code: (content) => `<pre class="hljs">${content}</pre>`,
-    },
+  },
+  (error, html) => {
+    if (error instanceof Error) {
+      f(error);
+    }
+    s(html);
   });
-
-  return new Promise((s, f) => {
-    marked(content, (error, html) => {
-      if (error instanceof Error) {
-        f(error);
-      }
-      s(html);
-    });
-  });
-};
+});
 
 export default mark;
