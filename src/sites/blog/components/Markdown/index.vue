@@ -13,6 +13,7 @@ export default {
   props: {
     content: String,
     getAsset: Function,
+    getLink: Function,
     incrementHeadings: [Boolean, Number],
   },
   data() {
@@ -33,11 +34,13 @@ export default {
       const {
         content,
         getAsset,
+        getLink,
         incrementHeadings,
       } = this;
 
       this.html = await marked(content, {
         getAsset,
+        getLink,
         incrementHeadings,
       });
     },

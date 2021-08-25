@@ -10,6 +10,7 @@
       <Markdown
         :content="post.content"
         :getAsset="(asset) => postAsset(post, asset)"
+        :getLink="(link) => blogLink(link)"
         incrementHeadings
       />
     </b-container>
@@ -17,6 +18,7 @@
 </template>
 
 <script lang="js">
+import blogLink from '@/sites/blog/utils/blogLink';
 import postAsset from '@/sites/blog/utils/postAsset';
 import Markdown from '@/sites/blog/components/Markdown';
 import Nav from '@/sites/blog/components/Nav';
@@ -52,6 +54,7 @@ export default {
     },
   },
   methods: {
+    blogLink,
     postAsset,
   },
   components: {

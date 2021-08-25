@@ -3,16 +3,23 @@ import highlight from 'highlight.js/lib/core';
 
 import 'highlight.js/styles/atom-one-dark.css';
 
+import isAbsoluteLink from '@/sites/blog/utils/isAbsoluteLink';
+
 const mark = (content, {
   getAsset,
+  getLink,
   incrementHeadings,
 }) => {
   marked.use({
     walkTokens(token) {
       const { type } = token;
-      if (type === 'image') {
-        if (!/^https?:\/\//.test(token.href)) {
+      if (type === 'image' && getAsset) {
+        if (!isAbsoluteLink(token.href)) {
           token.href = getAsset(token.href);
+        }
+      } else if (type === 'link' && getLink) {
+        if (!isAbsoluteLink(token.href)) {
+          token.href = getLink(token.href);
         }
       } else if (type === 'heading' && incrementHeadings) {
         const incrementCount = typeof incrementHeadings === 'number'
