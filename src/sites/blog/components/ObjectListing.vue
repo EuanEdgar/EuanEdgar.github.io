@@ -17,8 +17,12 @@ export default {
 
 <style lang="scss">
 a[class$="-listing"] {
+  height: 100%;
+
   text-decoration: none;
   .card {
+    height: 100%;
+
     .card-img {
       height: 15vw;
       object-fit: cover;
