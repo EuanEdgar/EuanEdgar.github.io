@@ -10,7 +10,7 @@ I always knew that this was going to end up being some forgotten side project so
 
 But, that decision does have some implications for what I had access to for this sub-project. Most blogs have some kind of CMS (Content management system), ranging from simple text boxes to the aforementioned fancy page builders. The problem with these is that they generally need a server with some kind of database to be running in the background, and they cost money. I don't want to be sinking money into some throwaway side project, so that meant I'd have to build something completely **serverless**.
 
-Okay, so I won't be building any fancy page builder. That's probably for the best, I want to be able to actually use this at some point, and if I get bogged down in building the perfect page editor then that is never happening. But I still need to be able to create edit content. Well, I'm one of those people that actually finds that markdown is more than adequate for my needs. I don't need any interactive components, and I struggle with formatting options more complex than a single header type (Should this be header 1 and then this be header 2? Do I need a parent header here? Repeat for around 10 minutes before deciding that, actually, just the one header is fine). So, I want to be able to **edit markdown**.
+Okay, so I won't be building any fancy page builder. That's probably for the best, I want to be able to actually use this at some point, and if I get bogged down in building the perfect page editor then that is never happening. But I still need to be able to create and edit content. Well, I'm one of those people that actually finds that markdown is more than adequate for my needs. I don't need any interactive components, and I struggle with formatting options more complex than a single header type (Should this be header 1 and then this be header 2? Do I need a parent header here? Repeat for around 10 minutes before deciding that, actually, just the one header is fine). So, I want to be able to **edit markdown**.
 
 Now for a few quick-fire requirements:
 
@@ -39,7 +39,7 @@ That seems fine. There is one obvious problem though: I don't want to have to tr
 # Indexing content
 Individual post JSONs is all well and good, but I need some way of listing posts without having to link a user directly to the page. Meaning that I need some kind of index JSON that can be loaded to list out posts. This is also a requirement to make that `category` field you can see in the JSON above do anything. So the next thing to consider is what those files will look like.
 
-Let's start with categories (Mostly because at this point it's the only one I've actually implemented at time of writing).
+Let's start with categories (Mostly because it's the only one I've actually implemented at time of writing).
 
 ## What does a category need?
 If I want to display a category to a user, what information do I need? Because at its most basic level a category is is a grouping of posts, it needs to have a list of posts. But, it shouldn't have the full content for all the posts it needs to display, that would end up with a huge file with a bunch of data we're not even going to show. All it needs is the name of the post, and the URL to link to (I actually use vue-router locations but for right now they serve the same purpose). So, you might end up with something like this:
@@ -108,7 +108,7 @@ This does have some downsides. In order to avoid entering into an infinite loop 
 # Getting into Vue
 Now begins the process of getting this data loaded in a web page, and making it look more like a fully-featured blog than just a page churning out JSON data. In terms of loading the data into the page, it's quite simple. The user visits a URL which has a post identifier in it - of the form [/blog/post/the-blog-without-a-backend](post#the-blog-without-a-backend). Vue renders a [`Post` view](https://github.com/EuanEdgar/euanedgar.github.io/blob/master/src/sites/blog/views/Post.vue) which pulls the identifier (Called a slug) out of the URL and passes it down through a [`DataLoader` component](https://github.com/EuanEdgar/euanedgar.github.io/blob/master/src/sites/blog/components/DataLoader.vue) to the [`Post` component](https://github.com/EuanEdgar/euanedgar.github.io/tree/master/src/sites/blog/components/Post).
 
-The `DataLoader` then fetches the specified JSON file and hands it down to its slot (The `Post` component in this case). Originally it used webpack's dynamic module loading to load the JSON files. This was great for a simplicity and caching point of view, posts would even be available offline. But the caching was a little too aggressive. If a post was changed, or a new post was added (Categories are also loaded via the `DataLoader`), that post wouldn't be available until the offline cache has had a chance to refresh (This will generally be the on the second full page load).
+The `DataLoader` then fetches the specified JSON file and hands it down to its slot (The `Post` component in this case). Originally it used webpack's dynamic module loading to load the JSON files. This was great from a simplicity and caching point of view, posts would even be available offline. But the caching was a little too aggressive. If a post was changed, or a new post was added (Categories are also loaded via the `DataLoader`), that post wouldn't be available until the offline cache has had a chance to refresh (This will generally be the on the second full page load).
 
 # Working with markdown
 Now that we have the data in a component we need to change something like this:
@@ -133,7 +133,7 @@ In the `index.vue` we have a simple Vue component that renders a `<div>` into th
 As the name implies, `marked.js` wraps the `marked` library. It extends `marked` via the `marked.use` method to attach some custom behaviour.
 
 ## Token walkers
-The first feature you might notice is the `walkTokens` function. This function is called by `marked` whenever it reads a token - any distinct piece of content, such as a link or a heading. Code is then run based on the type of the token, which may the token in some way.
+The first feature you might notice is the `walkTokens` function. This function is called by `marked` whenever it reads a token - any distinct piece of content, such as a link or a heading. Code is then run based on the type of the token, which may alter the token in some way.
 
 ### Images
 When an image is encountered, if the function has been provided with a `getAsset` function, the `href` attribute is checked. If it is not a link to an external resource (Doesn't match `/^https?://`), `getAsset` is called. In this case it ultimately calls the [`postAsset`](https://github.com/EuanEdgar/euanedgar.github.io/blob/master/src/sites/blog/utils/postAsset.js) function. This simply returns the correct path for an asset belonging to the current post.
@@ -203,7 +203,7 @@ if (token.depth <= 6 - incrementCount) {
 Moving on down through `marked.js` we reach the highlight function. This function dynamically imports the correct syntax file for this language and uses [`highlight.js`](https://github.com/highlightjs/highlight.js/) to perform the appropriate syntax highlighting. It also has a little bit of logic to ensure it loads the correct syntax file - `js` and `md` are expanded to `javascript` and `markdown` respectively, `html` uses the `xml` syntax, but otherwise that's all.
 
 ## Renderer
-Finally, we reach the renderer definition. This object defines render functions which overwrite the code renderer type to wrap the content in a `<pre>` element which has the `hljs` class applied to it. This is required for the syntax highlighting to apply correctly to code blocks.
+Finally, we reach the renderer definition. This object defines render functions which overwrite the default way that content is converted to HTML. I overwrite the code renderer type to wrap the content in a `<pre>` element which has the `hljs` class applied to it. This is required for the syntax highlighting to apply correctly to code blocks.
 
 # Design
 Alright. On to the part I've been dreading. Design.
