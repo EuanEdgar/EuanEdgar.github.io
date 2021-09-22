@@ -53,7 +53,7 @@ export default {
         this.undoableStack.push(this.currentAction);
         this.currentAction = null;
 
-        this.redrawFromundoableStack();
+        this.redrawFromUndoableStack();
       }
     },
     onMouseMove(e) {
@@ -83,7 +83,7 @@ export default {
 
       context.clearRect(0, 0, canvas.width, canvas.height);
     },
-    redrawFromundoableStack() {
+    redrawFromUndoableStack() {
       this.clearCanvas();
 
       const {
