@@ -10,6 +10,8 @@
 </template>
 
 <script lang="js">
+import transferItems from './transferItems';
+
 export default {
   props: {
     colour: String,
@@ -111,21 +113,9 @@ export default {
         redoableStack,
       } = this;
 
-      const undoAction = () => {
-        const action = undoableStack.pop();
-        redoableStack.push(action);
-      };
-
-      for (let x = 0; x < n; x++) {
-        if (undoableStack.length) {
-          undoAction();
-        } else {
-          this.redrawFromundoableStack();
-          return x;
-        }
-      }
-      this.redrawFromundoableStack();
-      return n;
+      const count = transferItems(undoableStack, redoableStack, n);
+      this.redrawFromUndoableStack();
+      return count;
     },
     redo(n = 1) {
       const {
@@ -133,21 +123,9 @@ export default {
         redoableStack,
       } = this;
 
-      const redoAction = () => {
-        const action = redoableStack.pop();
-        undoableStack.push(action);
-      };
-
-      for (let x = 0; x < n; x++) {
-        if (redoableStack.length) {
-          redoAction();
-        } else {
-          this.redrawFromundoableStack();
-          return x;
-        }
-      }
-      this.redrawFromundoableStack();
-      return n;
+      const count = transferItems(redoableStack, undoableStack, n);
+      this.redrawFromUndoableStack();
+      return count;
     },
     isValidAction(action) {
       if (!action) {
