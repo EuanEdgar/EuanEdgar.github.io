@@ -1,6 +1,20 @@
 import Tool from './Tool';
 
 class Line extends Tool {
+  static options = [
+    {
+      name: 'colour',
+      type: 'colour',
+      global: true,
+      default: '#000000',
+    },
+    {
+      name: 'strokeWidth',
+      type: 'number',
+      default: 15,
+    },
+  ]
+
   onMouseDown(e) {
     this.startAction();
 

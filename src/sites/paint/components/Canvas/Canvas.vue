@@ -10,12 +10,8 @@
 </template>
 
 <script lang="js">
-import Line from '@/sites/paint/tools/Line';
+import tools from '@/sites/paint/tools';
 import transferItems from './transferItems';
-
-const tools = {
-  line: Line,
-};
 
 export default {
   data() {
@@ -54,15 +50,17 @@ export default {
       this.redoableStack = [];
       this.redrawFromUndoableStack();
     },
-    redrawFromUndoableStack() {
-      this.clearCanvas();
+    redrawFromUndoableStack(depth = 0) {
+      if (depth >= 0) {
+        this.clearCanvas();
+      }
 
       const {
         undoableStack,
         context,
       } = this;
 
-      undoableStack.forEach((action) => {
+      undoableStack.slice(depth).forEach((action) => {
         const tool = tools[action.type];
 
         tool.drawAction(action, context);
@@ -85,7 +83,9 @@ export default {
       } = this;
 
       const count = transferItems(redoableStack, undoableStack, n);
-      this.redrawFromUndoableStack();
+      if (count > 0) {
+        this.redrawFromUndoableStack(-count);
+      }
       return count;
     },
   },

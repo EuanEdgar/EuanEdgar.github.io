@@ -1,21 +1,24 @@
 class Tool {
   constructor(props) {
-    const {
-      colour,
-      strokeWidth,
-      toolContext,
-      drawContext,
-      commitAction,
-    } = props;
-
     this.action = null;
 
-    this.colour = colour;
-    this.strokeWidth = strokeWidth;
+    this.setProps(props);
+  }
 
-    this.toolContext = toolContext;
-    this.drawContext = drawContext;
-    this.parentCommitAction = commitAction;
+  setOptions(props) {
+    this.setProps(props);
+  }
+
+  setProps(props) {
+    const {
+      commitAction,
+      ...otherProps
+    } = props;
+
+    Object.entries(otherProps).forEach(([key, value]) => {
+      this[key] = value;
+    });
+    this.parentCommitAction = commitAction || this.parentCommitAction;
   }
 
   setColour(context, colour) {
