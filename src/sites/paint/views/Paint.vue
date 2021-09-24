@@ -30,12 +30,16 @@ export default {
     },
     toolSettings() {
       const {
+        drawLayer,
+        toolLayer,
         drawContext,
         toolContext,
         commitAction,
       } = this.$refs.canvas;
 
       return {
+        drawLayer,
+        toolLayer,
         drawContext,
         toolContext,
         commitAction,

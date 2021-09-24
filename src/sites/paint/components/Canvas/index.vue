@@ -36,7 +36,7 @@ export default {
     const {
       drawLayer,
       toolLayer,
-    } = this.$refs;
+    } = this;
 
     this.drawContext = drawLayer.context;
     this.toolContext = toolLayer.context;
@@ -63,6 +63,14 @@ export default {
     },
     redo() {
       this.$refs.drawLayer.redo();
+    },
+  },
+  computed: {
+    drawLayer() {
+      return this.$refs.drawLayer;
+    },
+    toolLayer() {
+      return this.$refs.toolLayer;
     },
   },
   components: {
