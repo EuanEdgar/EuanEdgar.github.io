@@ -10,11 +10,13 @@
       ref="canvas"
       :tool="tool"
     />
+    <Options />
   </div>
 </template>
 
 <script lang="js">
 import Canvas from '@/sites/paint/components/Canvas';
+import Options from '@/sites/paint/components/Options';
 
 export default {
   inject: ['$store'],
@@ -50,6 +52,7 @@ export default {
   },
   components: {
     Canvas,
+    Options,
   },
 };
 </script>
