@@ -22,7 +22,7 @@ export default {
   inject: ['$store'],
   mounted() {
     this.$store.dispatch('setToolSettings', this.toolSettings);
-    this.$store.dispatch('selectTool', 'line');
+    this.$store.dispatch('selectTool', 'pen');
   },
   computed: {
     tool() {

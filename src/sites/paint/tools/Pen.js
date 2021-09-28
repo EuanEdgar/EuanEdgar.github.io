@@ -1,6 +1,6 @@
 import Tool from './Tool';
 
-class Line extends Tool {
+class Pen extends Tool {
   static options = [
     {
       name: 'colour',
@@ -53,7 +53,7 @@ class Line extends Tool {
 
   startAction() {
     this.action = {
-      type: 'line',
+      type: 'pen',
       colour: this.colour,
       strokeWidth: this.strokeWidth,
       points: [],
@@ -98,4 +98,4 @@ class Line extends Tool {
   }
 }
 
-export default Line;
+export default Pen;
