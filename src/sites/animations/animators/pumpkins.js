@@ -7,7 +7,14 @@ import permute from '@/utils/permute';
 import Animator from './Animator';
 
 const bgColour = '#000000';
-const stemColours = ['#6b4000'];
+const stemColours = [
+  '#6b4000',
+  '#543506',
+  '#845b1e',
+  '#442902',
+  '#443602',
+  '#6d4302',
+];
 const fleshColours = [
   '#ff8c00',
   '#ffffff',
