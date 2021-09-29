@@ -2,12 +2,31 @@ import random from '@/utils/random';
 import randomInt from '@/utils/random/int';
 import randomItem from '@/utils/random/item';
 
+import permute from '@/utils/permute';
+
 import Animator from './Animator';
 
 const bgColour = '#000000';
 const stemColours = ['#6b4000'];
-const fleshColours = ['#ff8c00', '#ffffff'];
-const faces = [':)', ':]', ':(', ';)'];
+const fleshColours = [
+  '#ff8c00',
+  '#ffffff',
+  '#ecab5c',
+  '#ec995c',
+  '#e87621',
+  '#ca6e1d',
+  '#eab87b',
+  '#bf7c2b',
+  '#efb46d',
+  '#ffca00',
+  '#f9d650',
+  '#e0ba28',
+  '#ff6b00',
+];
+
+const eyes = [':', ';'];
+const mouths = [')', '(', 'o', '§', 'D', 'C', '0'];
+const faces = permute(eyes, mouths).map(([eye, mouth]) => `${eye}${mouth}`);
 
 const numkins = 20;
 
@@ -28,7 +47,7 @@ class Pumpkin extends Animator {
       width,
     } = this.canvas;
 
-    const maxY = initial ? height : -100;
+    const maxY = initial ? height : -200;
 
     return {
       position: [randomInt(-5, width), randomInt(-300, maxY)],
