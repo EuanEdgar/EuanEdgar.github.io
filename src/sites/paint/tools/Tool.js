@@ -16,6 +16,13 @@ class Tool {
     } = props;
 
     Object.entries(otherProps).forEach(([key, value]) => {
+      const keyUpper = key[0].toUpperCase() + key.slice(1);
+      if (this[`on${keyUpper}Change`]) {
+        const original = this[key];
+        if (original !== value) {
+          this[`on${keyUpper}Change`](value);
+        }
+      }
       this[key] = value;
     });
     this.parentCommitAction = commitAction || this.parentCommitAction;

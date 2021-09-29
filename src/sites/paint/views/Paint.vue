@@ -4,6 +4,10 @@
     @keydown.y.ctrl.prevent="redo"
     @keydown.z.meta.prevent="undo"
     @keydown.y.meta.prevent="redo"
+
+    @keydown.16="shift"
+    @keyup.16="unshift"
+
     tabindex="1"
   >
     <Canvas
@@ -52,6 +56,16 @@ export default {
     },
     redo() {
       this.$refs.canvas.redo();
+    },
+    shift() {
+      if (this.$store.state.tool) {
+        this.$store.state.tool.setProps({ shift: true });
+      }
+    },
+    unshift() {
+      if (this.$store.state.tool) {
+        this.$store.state.tool.setProps({ shift: false });
+      }
     },
   },
   components: {
