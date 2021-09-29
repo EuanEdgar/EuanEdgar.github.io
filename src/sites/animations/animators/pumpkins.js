@@ -1,14 +1,13 @@
+import random from '@/utils/random';
+import randomInt from '@/utils/random/int';
+import randomItem from '@/utils/random/item';
+
 import Animator from './Animator';
 
 const bgColour = '#000000';
-
-const randInt = (min, max) => (
-  Math.floor(rand(min, max) - 1)
-);
-
-const rand = (min, max) => (
-  Math.random() * (max - min) + min
-);
+const stemColours = ['#6b4000'];
+const fleshColours = ['#ff8c00', '#ffffff'];
+const faces = [':)', ':]', ':(', ';)'];
 
 const numkins = 20;
 
@@ -20,7 +19,7 @@ class Pumpkin extends Animator {
   }
 
   init() {
-    this.pumpkins = new Array(numkins).fill(null).map(() => this.makePumpkin(true));
+    this.pumpkins = new Array(numkins).fill(true).map(this.makePumpkin);
   }
 
   makePumpkin(initial = false) {
@@ -32,9 +31,12 @@ class Pumpkin extends Animator {
     const maxY = initial ? height : -100;
 
     return {
-      position: [randInt(-5, width), randInt(-300, maxY)],
-      momentum: randInt(10, 100),
-      size: rand(0.5, 4),
+      position: [randomInt(-5, width), randomInt(-300, maxY)],
+      momentum: randomInt(10, 100),
+      size: random(0.5, 4),
+      fleshColour: randomItem(fleshColours),
+      stemColour: randomItem(stemColours),
+      face: randomItem(faces),
     };
   }
 
@@ -71,11 +73,14 @@ class Pumpkin extends Animator {
       position,
       momentum,
       size,
+      stemColour,
+      fleshColour,
+      face,
     } = pumpkin;
 
     const [x, y] = position;
 
-    context.fillStyle = '#6b4000';
+    context.fillStyle = stemColour;
     context.beginPath();
     context.moveTo(x - (10 * size), y - (45 * size));
     context.lineTo(x - (5 * size), y - (60 * size));
@@ -84,7 +89,7 @@ class Pumpkin extends Animator {
     context.fill();
     context.closePath();
 
-    context.fillStyle = '#ff8c00';
+    context.fillStyle = fleshColour;
     context.beginPath();
     context.arc(x, y, 50 * size, 0, Math.PI * 2, true);
     context.fill();
@@ -92,7 +97,7 @@ class Pumpkin extends Animator {
 
     context.fillStyle = '#000000';
     context.font = `${30 * size}px Arial`;
-    context.fillText(':)', x - 10 * size, y + 5 * size);
+    context.fillText(face, x - 10 * size, y + 5 * size);
 
     pumpkin.position[1] += momentum * this.scalar;
 
