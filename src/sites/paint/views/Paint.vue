@@ -14,6 +14,7 @@
       ref="canvas"
       :tool="tool"
     />
+    <ToolSelector />
     <Options />
   </div>
 </template>
@@ -21,6 +22,7 @@
 <script lang="js">
 import Canvas from '@/sites/paint/components/Canvas';
 import Options from '@/sites/paint/components/Options';
+import ToolSelector from '@/sites/paint/components/ToolSelector';
 
 export default {
   inject: ['$store'],
@@ -71,6 +73,7 @@ export default {
   components: {
     Canvas,
     Options,
+    ToolSelector,
   },
 };
 </script>
