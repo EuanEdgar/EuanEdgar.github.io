@@ -27,8 +27,7 @@ class Rectangle extends DraggableTool {
     if (this.action) {
       this.action.square = shift;
 
-      this.toolLayer.clearCanvas();
-      Rectangle.drawAction(this.action, this.toolContext);
+      this.redrawToolLayer();
     }
   }
 
