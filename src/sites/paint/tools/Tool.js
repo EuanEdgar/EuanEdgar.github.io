@@ -68,7 +68,7 @@ class Tool {
   }
 
   pointFromEvent(e) {
-    return [e.clientX, e.clientY];
+    return [e.layerX, e.layerY];
   }
 }
 
