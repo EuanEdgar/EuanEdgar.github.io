@@ -16,7 +16,7 @@ class Pen extends Tool {
   ]
 
   onMouseDown(e) {
-    if (!this.action) {
+    if (this.canStartAction()) {
       this.startAction();
 
       const point = this.pointFromEvent(e);

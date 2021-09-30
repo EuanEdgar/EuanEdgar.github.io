@@ -60,6 +60,10 @@ class Tool {
     }
   }
 
+  canStartAction() {
+    return !this.action;
+  }
+
   isValidAction(action) {
     return !!action;
   }

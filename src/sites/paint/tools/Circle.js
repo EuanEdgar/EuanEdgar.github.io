@@ -1,8 +1,9 @@
 import DraggableTool from './DraggableTool';
 
-import squareBox from './utils/squareBox';
+import distance from './utils/distance';
+import midpoint from './utils/midpoint';
 
-class Rectangle extends DraggableTool {
+class Circle extends DraggableTool {
   static options = [
     {
       name: 'colour',
@@ -20,21 +21,12 @@ class Rectangle extends DraggableTool {
   redrawToolLayer() {
     this.toolLayer.clearCanvas();
 
-    Rectangle.drawAction(this.action, this.toolContext);
-  }
-
-  onShiftChange(shift) {
-    if (this.action) {
-      this.action.square = shift;
-
-      this.toolLayer.clearCanvas();
-      Rectangle.drawAction(this.action, this.toolContext);
-    }
+    Circle.drawAction(this.action, this.toolContext);
   }
 
   startAction() {
     this.action = {
-      type: 'rectangle',
+      type: 'circle',
       colour: this.colour,
       strokeWidth: this.strokeWidth,
       square: this.shift,
@@ -59,20 +51,21 @@ class Rectangle extends DraggableTool {
     context.beginPath();
 
     const start = origin;
-    let end = final;
+    const end = final;
     if (square) {
-      end = squareBox(start, end);
+      const center = midpoint(start, end);
+      const diameter = distance(start, end);
+
+      context.arc(...center, diameter / 2, 0, Math.PI * 2);
+    } else {
+      const center = midpoint(start, end);
+      const diameter = distance(start, end);
+
+      context.arc(...center, diameter / 2, 0, Math.PI * 2);
     }
 
-    context.moveTo(...start);
-    context.lineTo(end[0], start[1]);
-    context.lineTo(...end);
-    context.lineTo(start[0], end[1]);
-    context.lineTo(...start);
-
     context.stroke();
-    context.closePath();
   }
 }
 
-export default Rectangle;
+export default Circle;
