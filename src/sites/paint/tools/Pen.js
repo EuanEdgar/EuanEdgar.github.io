@@ -16,17 +16,19 @@ class Pen extends Tool {
   ]
 
   onMouseDown(e) {
-    this.startAction();
+    if (!this.action) {
+      this.startAction();
 
-    const point = this.pointFromEvent(e);
+      const point = this.pointFromEvent(e);
 
-    this.action.points.push(point);
+      this.action.points.push(point);
 
-    this.toolContext.beginPath();
-    this.setColour(this.toolContext, this.colour);
-    this.setStrokeWidth(this.toolContext, this.strokeWidth);
+      this.toolContext.beginPath();
+      this.setColour(this.toolContext, this.colour);
+      this.setStrokeWidth(this.toolContext, this.strokeWidth);
 
-    this.toolContext.moveTo(...point);
+      this.toolContext.moveTo(...point);
+    }
   }
 
   onMouseMove(e) {

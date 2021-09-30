@@ -16,10 +16,12 @@ class Rectangle extends Tool {
   ]
 
   onMouseDown(e) {
-    const point = this.pointFromEvent(e);
+    if (!this.action) {
+      const point = this.pointFromEvent(e);
 
-    this.startAction();
-    this.action.origin = point;
+      this.startAction();
+      this.action.origin = point;
+    }
   }
 
   onMouseMove(e) {
@@ -45,10 +47,6 @@ class Rectangle extends Tool {
       this.toolLayer.clearCanvas();
       Rectangle.drawAction(this.action, this.toolContext);
     }
-  }
-
-  isValidAction() {
-    return true;
   }
 
   startAction() {

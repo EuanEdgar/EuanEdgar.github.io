@@ -60,6 +60,10 @@ class Tool {
     }
   }
 
+  isValidAction(action) {
+    return !!action;
+  }
+
   cancel() {
     const { toolContext } = this;
 
