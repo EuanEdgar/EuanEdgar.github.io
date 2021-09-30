@@ -65,6 +65,7 @@ class Circle extends DraggableTool {
     }
 
     context.stroke();
+    context.closePath();
   }
 }
 
