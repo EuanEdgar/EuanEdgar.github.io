@@ -28,7 +28,11 @@ class Animator {
       }
 
       lastStamp = timestamp;
-    } while (!done);
+    } while (!done && !this.haltAnimation);
+  }
+
+  stop() {
+    this.haltAnimation = true;
   }
 }
 

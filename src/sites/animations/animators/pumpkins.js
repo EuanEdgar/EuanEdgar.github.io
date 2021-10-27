@@ -31,9 +31,11 @@ const fleshColours = [
   '#ff6b00',
 ];
 
-const eyes = [':', ';'];
-const mouths = [')', '(', 'o', '§', 'D', 'C', '0'];
+const eyes = [':'];
+const mouths = [')', '(', 'o', '§', 'D', 'C', '0', 'P'];
 const faces = permute(eyes, mouths).map(([eye, mouth]) => `${eye}${mouth}`);
+const specialFaces = [';)'];
+faces.push(...specialFaces);
 
 const numkins = 20;
 
@@ -106,6 +108,8 @@ class Pumpkin extends Animator {
 
     const [x, y] = position;
 
+    context.lineWidth = 2;
+
     context.fillStyle = stemColour;
     context.beginPath();
     context.moveTo(x - (10 * size), y - (45 * size));
@@ -113,17 +117,19 @@ class Pumpkin extends Animator {
     context.lineTo(x + (5 * size), y - (60 * size));
     context.lineTo(x + (10 * size), y - (45 * size));
     context.fill();
+    context.stroke();
     context.closePath();
 
     context.fillStyle = fleshColour;
     context.beginPath();
     context.arc(x, y, 50 * size, 0, Math.PI * 2, true);
     context.fill();
+    context.stroke();
     context.closePath();
 
     context.fillStyle = '#000000';
     context.font = `${30 * size}px Arial`;
-    context.fillText(face, x - 10 * size, y + 5 * size);
+    context.fillText(face, x - 12 * size, y + 7 * size);
 
     pumpkin.position[1] += momentum * this.scalar;
 

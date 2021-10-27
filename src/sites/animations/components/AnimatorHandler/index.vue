@@ -31,6 +31,13 @@ export default {
       return canvas && context;
     },
   },
+  unmounted() {
+    const { animation } = this;
+
+    if (animation) {
+      animation.stop();
+    }
+  },
   methods: {
     setCanvas({ canvas, context }) {
       this.canvas = canvas;
