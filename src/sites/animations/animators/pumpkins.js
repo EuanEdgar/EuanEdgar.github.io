@@ -127,9 +127,10 @@ class Pumpkin extends Animator {
     context.stroke();
     context.closePath();
 
+    context.textAlign = 'center';
     context.fillStyle = '#000000';
     context.font = `${30 * size}px Arial`;
-    context.fillText(face, x - 12 * size, y + 7 * size);
+    context.fillText(face, x, y + 7 * size);
 
     pumpkin.position[1] += momentum * this.scalar;
 
