@@ -1,0 +1,4 @@
+diff a/src/sites/paint/views/Paint.vue b/src/sites/paint/views/Paint.vue	(rejected hunks)
+@@ -25 +25 @@ import Options from '@/sites/paint/components/Options';
+-import ToolSelector from '@/sites/paint/components/ToolSelector'
++import ToolSelector from '@/sites/paint/components/ToolSelector';

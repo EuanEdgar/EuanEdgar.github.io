@@ -28,6 +28,12 @@ export default {
             name: 'Blog-Home',
           },
         },
+        {
+          name: 'Paint',
+          location: {
+            name: 'Paint',
+          },
+        },
       ],
     };
   },

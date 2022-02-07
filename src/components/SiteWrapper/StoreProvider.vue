@@ -28,7 +28,7 @@ export default {
           key.startsWith(moduleName)
         )).reduce((getters, [key, getter]) => ({
           ...getters,
-          [key]: getter,
+          [key.replace(`${moduleName}/`, '')]: getter,
         }), {}),
       },
       $rootStore: $store,
