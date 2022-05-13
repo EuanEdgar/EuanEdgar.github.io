@@ -1,45 +1,19 @@
+import tokenize from './tokenize';
+import parseToken2 from './parseToken';
+
 const parseToken = (token) => {
   const {
     groups: {
       name,
       type,
       field,
-      options: optionString,
+      options: optionString = '',
     },
-  } = /((?<name>\w+)#)?(?<type>\w+)(\.(?<field>\w+))?( (?<options>.*))?/.exec(token);
+  } = /((?<name>\w+)#)?(?<type>\w+)(\.(?<field>\w+))?( (?<options>.*))?$/.exec(token);
 
-  let escapeNext = false;
-  const optionTokens = optionString.split('').reduce((tokens, character) => {
-    let token = tokens.splice(-1, 1)[0];
-
-    const escape = escapeNext;
-    escapeNext = false;
-
-    switch (character) {
-      case '\\': {
-        if (escape) {
-          token += character;
-        } else {
-          escapeNext = true;
-        }
-        break;
-      }
-      case ' ': {
-        if (escape) {
-          token += character;
-        } else {
-          tokens.push(token);
-          token = '';
-        }
-        break;
-      }
-      default: {
-        token += character;
-      }
-    }
-
-    return [...tokens, token];
-  }, ['']).slice(0, -1);
+  const optionTokens = tokenize(optionString, { splitOn: ' ' })
+    .filter(({ value }) => value.trim())
+    .map(({ value }) => value);
 
   while (optionTokens.includes('=')) {
     const index = optionTokens.indexOf('=');
@@ -71,14 +45,22 @@ const parseToken = (token) => {
   };
 };
 
-const parseTemplate = (template, fn) => {
-  const data = {};
-
-  return template.replace(/{(.*?)}/g, (_, content) => {
-    const token = parseToken(content);
-
-    return fn(token, data);
+const parseTemplate = (template, data = {}) => {
+  const parts = tokenize(template, {
+    startToken: ({ trigger, character }) => {
+      if (trigger === '{') {
+        return { type: 'token', value: character };
+      }
+      return { type: 'text', value: character };
+    },
   });
+
+  return parts.filter(({ value }) => value).map((token) => {
+    if (token.type === 'text') {
+      return token.value;
+    }
+    return parseToken2(parseToken(token.value.trim()), data, { parseTemplate });
+  }).join('');
 };
 
 export default parseTemplate;

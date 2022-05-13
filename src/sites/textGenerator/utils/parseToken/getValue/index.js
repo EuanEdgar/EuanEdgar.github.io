@@ -3,19 +3,22 @@ import randomItem from '@/utils/random/item';
 import entities from './entities';
 import filterEntities from './filterEntities';
 
-const getValue = (type, options) => {
+const getValue = (type, options, data, { parseTemplate }) => {
   switch (type) {
     case 'choice': {
-      const values = Object.values(options);
-      return randomItem(values);
+      const values = Object.values(options.settings);
+      const template = randomItem(values);
+      return parseTemplate(template, data);
     }
     case 'switch': {
       const {
-        value,
-        ...choices
+        settings: {
+          value,
+          ...choices
+        },
       } = options;
 
-      return choices[value] || choices.default;
+      return parseTemplate(choices[value] || choices.default, data);
     }
     default: {
       const choices = filterEntities(entities[type], options);

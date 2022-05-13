@@ -11,7 +11,7 @@ const extractOptions = (options, data) => {
       indefiniteArticle,
       titleize,
       distinct,
-      filters,
+      settings,
     }, [key, value]) => {
       if (key === 'pluralize') {
         // eslint-disable-next-line no-param-reassign
@@ -33,7 +33,7 @@ const extractOptions = (options, data) => {
       } else if (/^distinct-on-\d+$/.test(key)) {
         // Do nothing
       } else {
-        filters[key] = value;
+        settings[key] = value;
       }
 
       return {
@@ -41,7 +41,7 @@ const extractOptions = (options, data) => {
         indefiniteArticle,
         titleize,
         distinct,
-        filters,
+        settings,
       };
     },
     {
@@ -49,7 +49,7 @@ const extractOptions = (options, data) => {
       indefiniteArticle: false,
       titleize: false,
       distinct: [],
-      filters: {},
+      settings: {},
     },
   );
 };
@@ -57,14 +57,18 @@ const extractOptions = (options, data) => {
 const applyReferencesToOptions = (options, data) => {
   Object.entries(options).forEach(([key, value]) => {
     if (/^!/.test(value)) {
-      const {
-        groups: {
-          name,
-          field,
-        },
-      } = /^!(?<name>.\w+)(\.(?<field>\w+))?/.exec(value);
+      const match = /^!(?<name>.\w+)(\.(?<field>\w+))?/.exec(value);
 
-      options[key] = getField(data[name], field);
+      if (match) {
+        const {
+          groups: {
+            name,
+            field,
+          },
+        } = match;
+
+        options[key] = getField(data[name], field);
+      }
     }
   });
 };

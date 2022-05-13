@@ -3,7 +3,7 @@ import formatText from './formatText';
 import getField from './getField';
 import getValue from './getValue';
 
-const parseToken = (token, data) => {
+const parseToken = (token, data, { parseTemplate }) => {
   const {
     type,
     name,
@@ -17,7 +17,10 @@ const parseToken = (token, data) => {
   if (data[name]) {
     value = data[name];
   } else {
-    value = getValue(type, options);
+    if (type === 'switch' && !(options.settings[options.settings.value])) {
+      debugger;
+    }
+    value = getValue(type, options, data, { parseTemplate });
 
     if (name) {
       data[name] = value;

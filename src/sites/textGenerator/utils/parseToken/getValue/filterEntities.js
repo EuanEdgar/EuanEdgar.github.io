@@ -1,10 +1,10 @@
 const filterEntities = (list, options) => {
   const {
-    filters,
+    settings,
     distinct,
   } = options;
 
-  const filteredList = Object.entries(filters).reduce((list, [key, value]) => (
+  const filteredList = Object.entries(settings).reduce((list, [key, value]) => (
     list.filter((entry) => (
       (entry[key] === value)
     ))
