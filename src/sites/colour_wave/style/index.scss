@@ -1,0 +1,31 @@
+div#colour_wave {
+  height: 100vh;
+  width: 100vw;
+
+  table {
+    border-collapse: collapse;
+
+    height: 100%;
+    width: 100%;
+
+    tbody {
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      tr {
+        flex: 1;
+        display: flex;
+
+        td {
+          flex: 1;
+          padding: 0;
+          transition: background-color 0.5s linear;
+          will-change: background-color;
+        }
+      }
+    }
+  }
+}
