@@ -73,4 +73,4 @@ The reasons for these shortcomings are threefold:
 
 If I do return to this project it might be interesting to implement it using the canvas element. If I were to do so I have no doubt that it could be more performant and allow for a higher resolution (Though I quite like its blocky nature), but that would only be the case if I implemented it correctly. I could just as easily spend days on code that is ultimately slower and produces a lower quality result than I have already. Also I am 100% sure that the background transitions would give me trouble.
 
-For now, I am going to leave this project alone. I have more ideas that I'd like to implement but I'm going to leave that for another time. Maybe if I give it some time to brew I may come up with some more interesting things to do with it
+For now, I am going to leave this project alone. I have more ideas that I'd like to implement but I'm going to leave that for another time. Maybe if I give it some time to brew I may come up with some more interesting things to do with it.
