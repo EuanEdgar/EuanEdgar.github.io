@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22c8d0"],{f45a:function(n,a){function c(n){return{name:"VBScript in HTML",subLanguage:"xml",contains:[{begin:"<%",end:"%>",subLanguage:"vbscript"}]}}n.exports=c}}]);
+//# sourceMappingURL=chunk-2d22c8d0.61190449.js.map

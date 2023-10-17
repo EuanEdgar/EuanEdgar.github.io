@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-699f380c","chunk-2d22c8d0"],{8643:function(n,i,e){function s(){s.warned||(s.warned=!0,console.log('Deprecation (warning): Using file extension in specifier is deprecated, use "highlight.js/lib/languages/vbscript-html" instead of "highlight.js/lib/languages/vbscript-html.js"'))}s(),n.exports=e("f45a")},f45a:function(n,i){function e(n){return{name:"VBScript in HTML",subLanguage:"xml",contains:[{begin:"<%",end:"%>",subLanguage:"vbscript"}]}}n.exports=e}}]);
+//# sourceMappingURL=chunk-699f380c.5b8a3347.js.map

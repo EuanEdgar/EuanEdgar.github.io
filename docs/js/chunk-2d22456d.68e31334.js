@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22456d"],{e05a:function(n,e){function i(n){return{name:"PHP template",subLanguage:"xml",contains:[{begin:/<\?(php|=)?/,end:/\?>/,subLanguage:"php",contains:[{begin:"/\\*",end:"\\*/",skip:!0},{begin:'b"',end:'"',skip:!0},{begin:"b'",end:"'",skip:!0},n.inherit(n.APOS_STRING_MODE,{illegal:null,className:null,contains:null,skip:!0}),n.inherit(n.QUOTE_STRING_MODE,{illegal:null,className:null,contains:null,skip:!0})]}]}}n.exports=i}}]);
+//# sourceMappingURL=chunk-2d22456d.68e31334.js.map

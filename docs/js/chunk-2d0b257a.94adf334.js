@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b257a"],{2468:function(n,e){function a(n){const e={className:"comment",begin:/\$noop\(/,end:/\)/,contains:[{begin:/\\[()]/},{begin:/\(/,end:/\)/,contains:[{begin:/\\[()]/},"self"]}],relevance:10},a={className:"keyword",begin:/\$[_a-zA-Z0-9]+(?=\()/},s={className:"variable",begin:/%[_a-zA-Z0-9:]+%/},c={className:"symbol",begin:/\\u[a-fA-F0-9]{4}/},i={className:"symbol",begin:/\\[\\nt$%,()]/};return{name:"Tagger Script",contains:[e,a,s,i,c]}}n.exports=a}}]);
+//# sourceMappingURL=chunk-2d0b257a.94adf334.js.map

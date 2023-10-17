@@ -1,0 +1,62 @@
+{
+  "name": "Vue",
+  "location": {
+    "name": "Blog-Category",
+    "params": {
+      "slug": "vue"
+    }
+  },
+  "posts": [
+    {
+      "name": "Creating a static site of static sites",
+      "location": {
+        "name": "Blog-Post",
+        "params": {
+          "slug": "creating-a-static-site-of-static-sites"
+        }
+      },
+      "created": "2021-08-04T00:00:00.000Z",
+      "headerImage": {
+        "src": "JavaScript-logo.png",
+        "options": {
+          "background-color": "#f0db50",
+          "color": "#323330",
+          "size": "contain",
+          "position": "right 20px center",
+          "lowContrast": false
+        }
+      },
+      "slug": "creating-a-static-site-of-static-sites"
+    },
+    {
+      "name": "The blog without a backend",
+      "location": {
+        "name": "Blog-Post",
+        "params": {
+          "slug": "the-blog-without-a-backend"
+        }
+      },
+      "created": "2021-08-25T00:00:00.000Z",
+      "headerImage": {
+        "src": "JavaScript-logo.png",
+        "options": {
+          "background-color": "#f0db50",
+          "color": "#323330",
+          "size": "contain",
+          "position": "right 20px center",
+          "lowContrast": false
+        }
+      },
+      "slug": "the-blog-without-a-backend"
+    }
+  ],
+  "slug": "vue",
+  "headerImage": {
+    "src": "vue.svg",
+    "options": {
+      "size": "contain",
+      "repeat": true,
+      "background-color": "#ffffff"
+    }
+  }
+}

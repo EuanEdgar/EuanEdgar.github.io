@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-146abe4c","chunk-2d0c13e6"],{"44e5":function(e,n){function i(e){return{name:"Plain text",aliases:["text","txt"],disableAutodetect:!0}}e.exports=i},ae2a:function(e,n,i){function t(){t.warned||(t.warned=!0,console.log('Deprecation (warning): Using file extension in specifier is deprecated, use "highlight.js/lib/languages/plaintext" instead of "highlight.js/lib/languages/plaintext.js"'))}t(),e.exports=i("44e5")}}]);
+//# sourceMappingURL=chunk-146abe4c.246b4eac.js.map

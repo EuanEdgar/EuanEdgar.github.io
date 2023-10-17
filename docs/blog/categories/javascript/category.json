@@ -1,0 +1,78 @@
+{
+  "name": "JavaScript",
+  "location": {
+    "name": "Blog-Category",
+    "params": {
+      "slug": "javascript"
+    }
+  },
+  "posts": [
+    {
+      "name": "Playing with colours",
+      "location": {
+        "name": "Blog-Post",
+        "params": {
+          "slug": "playing-with-colours"
+        }
+      },
+      "created": "2022-07-27T00:00:00.000Z",
+      "headerImage": {
+        "src": "preview.png"
+      },
+      "slug": "playing-with-colours"
+    },
+    {
+      "name": "Creating a static site of static sites",
+      "location": {
+        "name": "Blog-Post",
+        "params": {
+          "slug": "creating-a-static-site-of-static-sites"
+        }
+      },
+      "created": "2021-08-04T00:00:00.000Z",
+      "headerImage": {
+        "src": "JavaScript-logo.png",
+        "options": {
+          "background-color": "#f0db50",
+          "color": "#323330",
+          "size": "contain",
+          "position": "right 20px center",
+          "lowContrast": false
+        }
+      },
+      "slug": "creating-a-static-site-of-static-sites"
+    },
+    {
+      "name": "The blog without a backend",
+      "location": {
+        "name": "Blog-Post",
+        "params": {
+          "slug": "the-blog-without-a-backend"
+        }
+      },
+      "created": "2021-08-25T00:00:00.000Z",
+      "headerImage": {
+        "src": "JavaScript-logo.png",
+        "options": {
+          "background-color": "#f0db50",
+          "color": "#323330",
+          "size": "contain",
+          "position": "right 20px center",
+          "lowContrast": false
+        }
+      },
+      "slug": "the-blog-without-a-backend"
+    }
+  ],
+  "slug": "javascript",
+  "headerImage": {
+    "src": "JavaScript-logo.png",
+    "options": {
+      "background-color": "#f0db50",
+      "color": "#323330",
+      "size": "contain",
+      "position": "right 20px center",
+      "lowContrast": false
+    }
+  }
+}

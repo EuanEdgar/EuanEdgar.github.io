@@ -1,0 +1,1 @@
+div#colour_wave{height:100vh;width:100vw}div#colour_wave table{border-collapse:collapse;height:100%;width:100%}div#colour_wave table tbody{height:100%;width:100%;display:flex;flex-direction:column}div#colour_wave table tbody tr{flex:1;display:flex}div#colour_wave table tbody tr td{flex:1;padding:0;transition:background-color .5s linear;will-change:background-color}

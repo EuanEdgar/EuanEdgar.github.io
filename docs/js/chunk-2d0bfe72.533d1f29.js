@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0bfe72"],{4e3:function(e,i,n){function a(){a.warned||(a.warned=!0,console.log('Deprecation (warning): Using file extension in specifier is deprecated, use "highlight.js/lib/languages/maxima" instead of "highlight.js/lib/languages/maxima.js"'))}a(),e.exports=n("399d")}}]);
+//# sourceMappingURL=chunk-2d0bfe72.533d1f29.js.map

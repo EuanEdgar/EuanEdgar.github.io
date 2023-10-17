@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20ff0a"],{b688:function(e,i,n){function a(){a.warned||(a.warned=!0,console.log('Deprecation (warning): Using file extension in specifier is deprecated, use "highlight.js/lib/languages/mathematica" instead of "highlight.js/lib/languages/mathematica.js"'))}a(),e.exports=n("ef7a")}}]);
+//# sourceMappingURL=chunk-2d20ff0a.5869442c.js.map

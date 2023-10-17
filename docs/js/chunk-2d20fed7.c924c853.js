@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20fed7"],{b65b:function(s,n){function e(s){return{name:"Shell Session",aliases:["console","shellsession"],contains:[{className:"meta",begin:/^\s{0,3}[/~\w\d[\]()@-]*[>%$#][ ]?/,starts:{end:/[^\\](?=\s*$)/,subLanguage:"bash"}}]}}s.exports=e}}]);
+//# sourceMappingURL=chunk-2d20fed7.c924c853.js.map

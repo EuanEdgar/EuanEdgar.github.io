@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c1389"],{"44b5":function(e,n){function s(e){const n=["from","maintainer","expose","env","arg","user","onbuild","stopsignal"];return{name:"Dockerfile",aliases:["docker"],case_insensitive:!0,keywords:n,contains:[e.HASH_COMMENT_MODE,e.APOS_STRING_MODE,e.QUOTE_STRING_MODE,e.NUMBER_MODE,{beginKeywords:"run cmd entrypoint volume add copy workdir label healthcheck shell",starts:{end:/[^\\]$/,subLanguage:"bash"}}],illegal:"</"}}e.exports=s}}]);
+//# sourceMappingURL=chunk-2d0c1389.42a49d95.js.map

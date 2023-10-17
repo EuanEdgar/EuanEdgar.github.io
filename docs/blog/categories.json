@@ -1,0 +1,42 @@
+[
+  {
+    "name": "JavaScript",
+    "postCount": 3,
+    "location": {
+      "name": "Blog-Category",
+      "params": {
+        "slug": "javascript"
+      }
+    },
+    "slug": "javascript",
+    "headerImage": {
+      "src": "JavaScript-logo.png",
+      "options": {
+        "background-color": "#f0db50",
+        "color": "#323330",
+        "size": "contain",
+        "position": "right 20px center",
+        "lowContrast": false
+      }
+    }
+  },
+  {
+    "name": "Vue",
+    "postCount": 2,
+    "location": {
+      "name": "Blog-Category",
+      "params": {
+        "slug": "vue"
+      }
+    },
+    "slug": "vue",
+    "headerImage": {
+      "src": "vue.svg",
+      "options": {
+        "size": "contain",
+        "repeat": true,
+        "background-color": "#ffffff"
+      }
+    }
+  }
+]

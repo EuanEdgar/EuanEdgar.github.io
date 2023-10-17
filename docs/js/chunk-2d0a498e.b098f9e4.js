@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0a498e"],{"06b4":function(n,e){function a(n){return{name:"Test Anything Protocol",case_insensitive:!0,contains:[n.HASH_COMMENT_MODE,{className:"meta",variants:[{begin:"^TAP version (\\d+)$"},{begin:"^1\\.\\.(\\d+)$"}]},{begin:/---$/,end:"\\.\\.\\.$",subLanguage:"yaml",relevance:0},{className:"number",begin:" (\\d+) "},{className:"symbol",variants:[{begin:"^ok"},{begin:"^not ok"}]}]}}n.exports=a}}]);
+//# sourceMappingURL=chunk-2d0a498e.b098f9e4.js.map
